@@ -9,36 +9,51 @@
 </head>
 
 <body>
-    <h2>vue_01 演示 vue 生命周期</h2>
-    <div id='vue_01'>
-        <p ref="dom">{{msg}}</p>
-        <a :style="style" @click.prevent="go" href="http://www.baidu.com">1111</a>
-    </div>
-    <div id='k'>
-        aaaa
+    <h2>vue 演示 vue 生命周期</h2>
+    <div id='vue'>
+        <p>{{msg}}</p>
+        <input type="button" value="change" v-on:click="changeMsg">
+        <input type="button" value="destory">
     </div>
     <script>
-        document.querySelector("#k").addEventListener("click",function(e){
-            console.log(e);
-        })
-        var vue_01 = new Vue({
-            el: '#vue_01',
+        var vue = new Vue({
+            el: '#vue',
             data: function () {
                 // 闭包
                 return {
-                    msg: 'msg',
-                    style:{
-                        color:'red',
-                        fontSize:"100px"
-                    }
+                    msg: 'vue 生命周期'
                 }
             },
-            methods:{
-                go:function(e){
-                    // alert(e);
-                    console.log(e);
-                    console.log(this.$refs.dom);
-                    e.preventDefault();
+            beforeCreate: function () {
+                console.log("01 - beforeCreate - init events & Lifecycle");
+            },
+            created: function () {
+                console.log("02 - created - init injections & reactivity");
+            },
+            beforeMount: function () {
+                console.log("03 - beforeMount - compile template into render function | compile el's outerHTML as template");
+            },
+            mounted: function () {
+                console.log("04 - mounted - create vm.$el and replace 'el' with it");
+            },
+            beforeUpdate: function () {
+                console.log("05 - beforeUpdate - when data changes");
+            },
+            updates: function () {
+                console.log("06[未打印] - updates - virtual DOM re-render and patch");
+            },
+            beforeDestory: function () {
+                console.log("07[未打印] - beforeDestory - when vm.$destory() is called");
+            },
+            destoryed: function () {
+                console.log("08[未打印] - destoryed - Teardown watchers,child components and event listeners");
+            },
+            methods: {
+                changeMsg: function () {
+                    this.msg = "vue 生命周期 - Change!";
+                },
+                destoryMsg: function () {
+                    //this.msg.destory();
                 }
             }
         });
