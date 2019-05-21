@@ -10,14 +10,14 @@
 
 <body>
     <h2>vue 演示 vue 生命周期</h2>
-    <div id='vue'>
+    <div id='vm'>
         <p>{{msg}}</p>
         <input type="button" value="change" v-on:click="changeMsg">
         <input type="button" value="destory">
     </div>
     <script>
         var vue = new Vue({
-            el: '#vue',
+            el: '#vm',
             data: function () {
                 // 闭包
                 return {
